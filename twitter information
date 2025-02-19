@@ -38,7 +38,26 @@ Ensure that these values are **correct and active** from the **X Developer Porta
 
 ---
 
-# **🔹 Step 2: Request an OAuth 1.0a Token**
+# **🔹 Step 2: Install Twurl and Dependencies**
+Twurl is a command-line tool that simplifies OAuth authentication for Twitter's API.
+
+### **Install Ruby (Required for Twurl)**
+1. Download the **latest Ruby installer** from [https://rubyinstaller.org/downloads/](https://rubyinstaller.org/downloads/)
+2. Run the installer and ensure **"Add Ruby to PATH"** is checked.
+
+### **Install Twurl and Required Gems**
+```sh
+gem install twurl
+```
+Verify installation with:
+```sh
+twurl --version
+```
+✅ If Twurl is installed, proceed with authentication.
+
+---
+
+# **🔹 Step 3: Request an OAuth 1.0a Token**
 
 ### **Method 1: Using Twurl** (Recommended for automation)
 ```sh
@@ -74,7 +93,7 @@ Paste this in a browser, log in, and retrieve the **PIN code**.
 
 ---
 
-# **🔹 Step 3: Convert the PIN into an Access Token**
+# **🔹 Step 4: Convert the PIN into an Access Token**
 
 ### **Exchange the PIN for Access Token via cURL**
 ```sh
@@ -91,7 +110,7 @@ oauth_token=YOUR_ACCESS_TOKEN&oauth_token_secret=YOUR_ACCESS_SECRET
 
 ---
 
-# **🔹 Step 4: Post a Tweet Using OAuth 1.0a**
+# **🔹 Step 5: Post a Tweet Using OAuth 1.0a**
 ```sh
 twurl -X POST "/1.1/statuses/update.json" \
     -d "status=Hello, world! 🚀 Posting via OAuth 1.0a!" \
@@ -104,18 +123,15 @@ twurl -X POST "/1.1/statuses/update.json" \
 
 ---
 
-# **🚨 Troubleshooting Common Errors**
-### **🔴 1. "Could Not Connect to Server"**
-- Ensure `https://api.twitter.com/` opens in a browser.
-- If blocked, change **DNS settings** to `8.8.8.8` (Google DNS) or use a VPN.
+# **🚨 Additional Troubleshooting**
+### **🔴 4. "Twurl Not Recognized"**
+- Ensure Ruby is properly installed.
+- Run `gem install twurl` to install the required dependencies.
+- Restart your terminal and try again.
 
-### **🔴 2. "Bad Authentication Data" (Code 215)**
-- Ensure **API Keys are correct and active**.
-- Regenerate keys in **Twitter Developer Portal** if needed.
-
-### **🔴 3. "Authorization Failed After Entering PIN"**
-- Verify **OAuth 1.0a settings in Developer Portal**.
-- Check that **the correct PIN was entered**.
+### **🔴 5. "OAuth Token Expired or Invalid"**
+- Re-run the authorization request in Step 3.
+- Ensure you are using the latest **OAuth 1.0a Consumer Keys**.
 
 ---
 
@@ -128,15 +144,6 @@ twurl -X POST "/1.1/statuses/update.json" \
 
 📌 **OAuth 1.0a Troubleshooting:**  
 🔗 [https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens](https://developer.twitter.com/en/docs/authentication/oauth-1-0a/obtaining-user-access-tokens)
-
----
-
-# **🚀 Final Summary**
-1️⃣ **Ensure Twitter Developer App is set up properly**
-2️⃣ **Obtain a Request Token using Twurl or cURL**
-3️⃣ **Generate the Authorization Link and get the PIN**
-4️⃣ **Exchange the PIN for an Access Token**
-5️⃣ **Use the Access Token to make API requests (e.g., post a tweet)**
 
 🚀 **This guide provides the complete AI-ready breakdown for OAuth 1.0a authentication and account interaction.**
 
